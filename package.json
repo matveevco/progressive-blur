@@ -10,27 +10,27 @@
   ],
   "license": "MIT",
   "author": "Andrew Prifer (https://github.com/AndrewPrifer)",
-  "repository": "AndrewPrifer/progressive-blur",
-  "bugs": "https://github.com/AndrewPrifer/progressive-blur/issues",
-  "homepage": "https://github.com/AndrewPrifer/progressive-blur",
-  "version": "1.0.0",
+  "repository": "your-username/progressive-blur",
+  "bugs": "https://github.com/your-username/progressive-blur/issues",
+  "homepage": "https://github.com/your-username/progressive-blur",
+  "version": "1.0.1",
   "type": "module",
   "files": [
-    "dist"
+    "lib"
   ],
-  "main": "./dist/main.cjs",
-  "module": "./dist/main.js",
-  "types": "./dist/main.d.ts",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/main.d.ts",
-      "import": "./dist/main.js",
-      "require": "./dist/main.cjs"
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsup",
+    "build": "tsup src/index.ts --dts --format esm,cjs --out-dir lib",
     "build-vite": "vite build"
   },
   "devDependencies": {
@@ -46,12 +46,12 @@
     "leva": "^0.9.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tsup": "^8.0.1",
+    "tsup": "^8.5.0",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^6.3.5"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": ">=18.2.0",
+    "react-dom": ">=18.2.0"
   }
 }
