@@ -3,12 +3,12 @@ import React from 'react';
 
 interface LinearBlurProps extends React.HTMLAttributes<HTMLDivElement> {
     strength?: number;
-    steps?: number;
-    falloffPercentage?: number;
     tint?: string;
-    side?: "left" | "right" | "top" | "bottom";
+    side?: "top" | "bottom" | "left" | "right";
+    falloffStart?: number;
+    falloffEnd?: number;
 }
-declare function LinearBlur({ strength, steps, falloffPercentage, tint, side, ...props }: LinearBlurProps): react_jsx_runtime.JSX.Element;
+declare const LinearBlur: ({ strength, tint, side, falloffStart, falloffEnd, ...props }: LinearBlurProps) => react_jsx_runtime.JSX.Element;
 
 interface RadialBlurProps extends React.HTMLAttributes<HTMLDivElement> {
     strength?: number;
