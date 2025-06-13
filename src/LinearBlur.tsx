@@ -4,26 +4,36 @@ interface LinearBlurProps extends React.HTMLAttributes<HTMLDivElement> {
   strength?: number;
   tint?: string;
   side?: "top" | "bottom" | "left" | "right";
-  falloffStart?: number; // % откуда начинается блюр (например, 50)
-  falloffEnd?: number; // % где заканчивается
+  topOffset?: number; // % до которого полный блюр, после чего переход к прозрачности
 }
 
 const LinearBlur = ({
   strength = 24,
   tint = "rgba(255,255,255,0.3)",
   side = "bottom",
-  falloffStart = 50,
-  falloffEnd = 100,
+  topOffset = 30,
   ...props
 }: LinearBlurProps) => {
-  const direction = {
-    top: "to bottom",
-    bottom: "to top",
-    left: "to right",
-    right: "to left",
-  }[side];
+  // Создаем правильный градиент в зависимости от стороны
+  const getMaskGradient = () => {
+    switch (side) {
+      case "top":
+        return `linear-gradient(to bottom, black 0%, black ${topOffset}%, transparent 100%)`;
+      case "bottom":
+        // Для фиксированного элемента сверху:
+        // 1. Полный блюр от 0% до topOffset%
+        // 2. Переход к прозрачности от topOffset% до 100%
+        return `linear-gradient(to bottom, black 0%, black ${topOffset}%, transparent 100%)`;
+      case "left":
+        return `linear-gradient(to right, black 0%, black ${topOffset}%, transparent 100%)`;
+      case "right":
+        return `linear-gradient(to left, black 0%, black ${topOffset}%, transparent 100%)`;
+      default:
+        return `linear-gradient(to bottom, black 0%, black ${topOffset}%, transparent 100%)`;
+    }
+  };
 
-  const maskGradient = `linear-gradient(${direction}, transparent ${falloffStart}%, black ${falloffEnd}%)`;
+  const maskGradient = getMaskGradient();
 
   return (
     <div
@@ -35,6 +45,7 @@ const LinearBlur = ({
         pointerEvents: "none",
         WebkitBackdropFilter: `blur(${strength}px)`,
         backdropFilter: `blur(${strength}px)`,
+        backgroundColor: tint,
         WebkitMaskImage: maskGradient,
         maskImage: maskGradient,
         WebkitMaskRepeat: "no-repeat",
