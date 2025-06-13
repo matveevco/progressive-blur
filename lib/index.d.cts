@@ -5,10 +5,9 @@ interface LinearBlurProps extends React.HTMLAttributes<HTMLDivElement> {
     strength?: number;
     tint?: string;
     side?: "top" | "bottom" | "left" | "right";
-    falloffStart?: number;
-    falloffEnd?: number;
+    topOffset?: number;
 }
-declare const LinearBlur: ({ strength, tint, side, falloffStart, falloffEnd, ...props }: LinearBlurProps) => react_jsx_runtime.JSX.Element;
+declare const LinearBlur: ({ strength, tint, side, topOffset, ...props }: LinearBlurProps) => react_jsx_runtime.JSX.Element;
 
 interface RadialBlurProps extends React.HTMLAttributes<HTMLDivElement> {
     strength?: number;
